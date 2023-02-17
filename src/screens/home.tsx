@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Dimensions, FlatList} from 'react-native';
+import {Dimensions, FlatList, View} from 'react-native';
 import VideoCard from '../components/videoCard';
 import {videoList} from '../services/videoService';
 const {height} = Dimensions.get('window');

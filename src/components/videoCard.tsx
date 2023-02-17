@@ -1,13 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import VideoPlayer from './VideoPlayer';
-
-const {height} = Dimensions.get('screen');
 
 interface VideoDetails {
   description: string;
@@ -23,10 +16,10 @@ interface Props {
   currentIndex: number;
 }
 
-const VideoCard = ({item, currentIndex}: Props): JSX.Element => {
+const VideoCard = ({item}: Props): JSX.Element => {
   return (
     <View style={styles.container}>
-      {currentIndex === item.id - 1 ? <VideoPlayer /> : <View style={styles.emptyVideoContainer}></View>}
+      <VideoPlayer url={item.sources[0]} />
       <View style={styles.videoDetailsContainer}>
         <View>
           <Text style={styles.title}>{item.title}</Text>
@@ -44,14 +37,17 @@ const VideoCard = ({item, currentIndex}: Props): JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    height: height - 50,
     padding: 10,
   },
-  emptyVideoContainer:{
+  emptyVideoContainer: {
     height: 250,
   },
   videoDetailsContainer: {
     marginTop: 20,
+    padding: 20,
+    borderWidth: 2,
+    borderColor: 'orange',
+    borderRadius: 25,
   },
   title: {
     fontWeight: 'bold',

@@ -1,5 +1,11 @@
 import React, {useRef, useState} from 'react';
-import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Platform,
+} from 'react-native';
 import Video from 'react-native-video';
 
 import PlayerControls from './playerControls';
@@ -7,7 +13,7 @@ import ProgressBar from './progressBar';
 
 const windowHeight = Dimensions.get('window').width * (9 / 16);
 const windowWidth = Dimensions.get('window').width - 22;
-const VideoPlayer = (): JSX.Element => {
+const VideoPlayer = ({url}:any): JSX.Element => {
   const videoRef: any = useRef();
   const [showControl, setShowControl] = useState(true);
   const [play, setPlay] = useState(false);
@@ -72,7 +78,10 @@ const VideoPlayer = (): JSX.Element => {
       <TouchableOpacity onPress={handleControls}>
         <Video
           source={{
-            uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
+            uri:
+              Platform.OS === 'ios'
+                ? 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4'
+                : url,
           }}
           ref={videoRef}
           style={styles.video}
